@@ -91,7 +91,7 @@ export class CategoriesBase extends React.Component {
               );
             })}
           </div>
-        :
+          :
           <ul className="Categories-list">
             {categories.map((category) => (
               <li className="Categories-item" key={category.name}>

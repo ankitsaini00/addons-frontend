@@ -37,7 +37,7 @@ describe('categoriesSaga', () => {
     sagaTester.start(categoriesSaga);
   });
 
-  it('should get Api from state then make API request to categories', async () => {
+  it('should get Api from state then make API request to categories', async() => {
     const mockApi = sinon.mock(api);
     const entities = sinon.stub();
     const result = sinon.stub();
@@ -78,7 +78,7 @@ describe('categoriesSaga', () => {
     mockApi.verify();
   });
 
-  it('should dispatch fail if API request fails', async () => {
+  it('should dispatch fail if API request fails', async() => {
     const mockApi = sinon.mock(api);
     const error = new Error('I have failed!');
 
@@ -105,7 +105,7 @@ describe('categoriesSaga', () => {
     expect(calledActions[3]).toEqual(hideLoading());
   });
 
-  it('should respond to all CATEGORIES_FETCH actions', async () => {
+  it('should respond to all CATEGORIES_FETCH actions', async() => {
     const mockApi = sinon.mock(api);
     const entities = sinon.stub();
     const result = sinon.stub();

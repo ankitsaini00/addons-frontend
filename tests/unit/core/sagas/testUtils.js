@@ -23,7 +23,7 @@ describe('Saga utils', () => {
       'ErrorHandler cannot dispatch from a saga');
   });
 
-  it('should return entire state', async () => {
+  it('should return entire state', async() => {
     function* testGetApiSaga() {
       yield takeEvery('TEST_GET_API', function* selectGetApiTest() {
         const state = yield select(getState);

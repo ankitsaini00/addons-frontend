@@ -41,7 +41,7 @@ describe('core/sagas/addons', () => {
     }));
   }
 
-  it('fetches an addon from the API', async () => {
+  it('fetches an addon from the API', async() => {
     mockApi
       .expects('fetchAddon')
       .once()
@@ -55,7 +55,7 @@ describe('core/sagas/addons', () => {
     mockApi.verify();
   });
 
-  it('shows a progress bar', async () => {
+  it('shows a progress bar', async() => {
     mockApi
       .expects('fetchAddon')
       .returns(Promise.resolve(createFetchAddonResult(fakeAddon)));
@@ -67,7 +67,7 @@ describe('core/sagas/addons', () => {
     expect(sagaTester.getCalledActions()[4]).toEqual(hideLoading());
   });
 
-  it('clears the error handler', async () => {
+  it('clears the error handler', async() => {
     mockApi
       .expects('fetchAddon')
       .returns(Promise.resolve(createFetchAddonResult(fakeAddon)));
@@ -79,7 +79,7 @@ describe('core/sagas/addons', () => {
       .toEqual(errorHandler.createClearingAction());
   });
 
-  it('dispatches an error', async () => {
+  it('dispatches an error', async() => {
     const error = new Error('some API error maybe');
     mockApi.expects('fetchAddon').returns(Promise.reject(error));
 

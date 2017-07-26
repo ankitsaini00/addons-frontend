@@ -50,7 +50,7 @@ describe('amo/sagas/landing', () => {
       }));
     }
 
-    it('fetches landing page addons from the API', async () => {
+    it('fetches landing page addons from the API', async() => {
       const addonType = ADDON_TYPE_EXTENSION;
       const baseArgs = { api: apiState };
       const baseFilters = {
@@ -106,7 +106,7 @@ describe('amo/sagas/landing', () => {
       expect(calledActions[3]).toEqual(hideLoading());
     });
 
-    it('dispatches an error', async () => {
+    it('dispatches an error', async() => {
       const error = new Error('some API error maybe');
       mockApi.expects('featured').returns(Promise.reject(error));
 

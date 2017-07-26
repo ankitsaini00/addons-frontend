@@ -45,7 +45,7 @@ describe('amo/sagas/reviews', () => {
       }));
     }
 
-    it('fetches reviews from the API', async () => {
+    it('fetches reviews from the API', async() => {
       const reviews = [fakeReview];
       mockAmoApi
         .expects('getReviews')
@@ -71,7 +71,7 @@ describe('amo/sagas/reviews', () => {
       expect(calledActions[3]).toEqual(hideLoading());
     });
 
-    it('dispatches an error', async () => {
+    it('dispatches an error', async() => {
       const error = new Error('some API error maybe');
       mockAmoApi.expects('getReviews').returns(Promise.reject(error));
 

@@ -89,7 +89,7 @@ export class Tracking {
     }
   }
 
- /*
+  /*
   * Param          Type    Required  Description
   * obj.category   String  Yes       Typically the object that
   *                                  was interacted with (e.g. button)
@@ -117,7 +117,7 @@ export class Tracking {
     this.log('sendEvent', JSON.stringify(data));
   }
 
- /*
+  /*
   * Should be called when a view changes or a routing update.
   */
   setPage(page) {

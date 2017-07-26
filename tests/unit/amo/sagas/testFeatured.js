@@ -43,7 +43,7 @@ describe('amo/sagas/featured', () => {
       }));
     }
 
-    it('fetches featured addons from the API', async () => {
+    it('fetches featured addons from the API', async() => {
       const addonType = ADDON_TYPE_EXTENSION;
       const { entities, result } = createAddonsApiResult([fakeAddon]);
       mockApi
@@ -68,7 +68,7 @@ describe('amo/sagas/featured', () => {
       expect(calledActions[3]).toEqual(hideLoading());
     });
 
-    it('dispatches an error', async () => {
+    it('dispatches an error', async() => {
       const error = new Error('some API error maybe');
       mockApi.expects('featured').returns(Promise.reject(error));
 

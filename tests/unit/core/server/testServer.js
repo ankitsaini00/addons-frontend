@@ -44,14 +44,14 @@ describe('core/server/base', () => {
   }
 
   describe('app', () => {
-    it('varies on DNT', async () => {
+    it('varies on DNT', async() => {
       const response = await testClient().get('/en-US/firefox/').end();
 
       expect(response.headers).toMatchObject({ vary: 'DNT' });
       expect(response.statusCode).toEqual(200);
     });
 
-    it('returns the status code of NestedStatus', async () => {
+    it('returns the status code of NestedStatus', async() => {
       // This is an example of implementing a NotFound component
       // using NestedStatus which exercises the server's logic for
       // getting the response status code from the rendered component.
