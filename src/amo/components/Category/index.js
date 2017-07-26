@@ -41,7 +41,7 @@ export class CategoryBase extends React.Component {
     return (
       <div className="Category">
         <CategoryHeader category={category} />
-        <SearchBase enableSearchSort={false} hasSearchParams {...searchProps} />
+        <SearchBase enableSearchSort={false} {...searchProps} />
       </div>
     );
   }

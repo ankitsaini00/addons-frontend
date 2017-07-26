@@ -16,13 +16,19 @@ export default function search(state = initialState, action) {
   const { payload } = action;
   switch (action.type) {
     case SEARCH_STARTED:
-      return { ...state, ...payload, loading: true };
+      return {
+        ...state,
+        count: payload.count,
+        filters: payload.filters,
+        page: payload.page,
+        results: [],
+        loading: true,
+      };
     case SEARCH_LOADED:
       return {
         ...state,
         count: payload.result.count,
         loading: false,
-        filters: payload.filters,
         results: payload.result.results.map((slug) => (
           payload.entities.addons[slug]
         )),

@@ -18,16 +18,16 @@ describe('search reducer', () => {
 
   describe('SEARCH_STARTED', () => {
     it('sets the filters and loading', () => {
-      const state = search(
-        {
-          filters: { query: 'bar' },
-          loading: false,
-          results: [{ slug: 'bar' }],
-        },
-        { type: 'SEARCH_STARTED', payload: { filters: { query: 'foo' } } });
+      const state = search({
+        filters: { query: 'bar' },
+        loading: false,
+      }, {
+        type: 'SEARCH_STARTED',
+        payload: { filters: { query: 'foo' } },
+      });
       expect(state.filters).toEqual({ query: 'foo' });
       expect(state.loading).toBe(true);
-      expect(state.results).toEqual([{ slug: 'bar' }]);
+      expect(state.results).toEqual([]);
     });
   });
 

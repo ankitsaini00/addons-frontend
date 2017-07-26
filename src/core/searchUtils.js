@@ -8,6 +8,7 @@ import { apiAddonType } from 'core/utils';
 export const paramsToFilter = {
   app: 'clientApp',
   category: 'category',
+  page: 'page',
   page_size: 'page_size',
   q: 'query',
   sort: 'sort',
@@ -43,23 +44,6 @@ export function parsePage(page) {
   return Number.isNaN(parsed) || parsed < 1 ? 1 : parsed;
 }
 
-export function mapStateToProps(state, ownProps) {
-  const { location } = ownProps;
-
-  const filters = convertQueryParamsToFilters({
-    ...location.query,
-    clientApp: state.api.clientApp,
-  });
-
-  // We don't count ALL filters here (eg clientApp) because it's not enough
-  // to search on and it's in every request on AMO.
-  const hasSearchParams = Object.values(location.query).some((param) => (
-    param && param.length
-  ));
-
-  return { ...state.search, filters, hasSearchParams };
-}
-
 export function performSearch(
   { api, auth = false, dispatch, filters, page, results }
 ) {
@@ -68,7 +52,7 @@ export function performSearch(
   }
 
   dispatch(searchStart({
-    errorHandlerId: 'Search', filters, page, results }));
+    errorHandlerId: 'Search', filters, results }));
   return search({ page, api, auth, filters })
     .then((response) => dispatch(searchLoad({ page, filters, ...response })))
     .catch(() => dispatch(searchFail({ page, filters })));
@@ -80,27 +64,13 @@ export function isLoaded({ page, state, filters }) {
   ) && !state.loading;
 }
 
-export function loadSearchResultsIfNeeded(
-  { store: { dispatch, getState }, location }
-) {
-  const page = parsePage(location.query.page);
-  const state = getState();
-  const filters = convertQueryParamsToFilters({
-    ...location.query,
-    clientApp: state.api.clientApp,
-  });
-
-  if (!isLoaded({ filters, page, state: state.search })) {
-    return performSearch({
-      api: state.api,
-      auth: state.auth,
-      dispatch,
-      filters,
-      page,
-      results: state.search.results,
-    });
-  }
-  return true;
+export function hasSearchFilters(filters) {
+  const filtersSubset = { ...filters };
+  delete filtersSubset.clientApp;
+  delete filtersSubset.lang;
+  delete filtersSubset.page;
+  delete filtersSubset.page_size;
+  return filtersSubset && !!Object.keys(filtersSubset).length;
 }
 
 export function loadByCategoryIfNeeded(

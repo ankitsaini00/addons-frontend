@@ -29,23 +29,13 @@ describe('<SearchResults />', () => {
 
   it('renders empty search results container', () => {
     const root = renderResults();
+    console.log('foo');
     expect(root.message.textContent).toContain('enter a search term');
-  });
-
-  it('renders no results if hasSearchParams is false', () => {
-    const root = renderResults({
-      hasSearchParams: false,
-      loading: false,
-      results: [fakeAddon],
-    });
-    expect(root.message.textContent).toContain('enter a search term');
-    expect(root.container.textContent).not.toContain(fakeAddon.name);
   });
 
   it('renders no results when searched but nothing is found', () => {
     const root = renderResults({
       count: 0,
-      hasSearchParams: true,
       loading: false,
       results: [],
     });
@@ -53,22 +43,21 @@ describe('<SearchResults />', () => {
   });
 
   it('renders error when no search params exist', () => {
-    const root = renderResults({ hasSearchParams: false });
+    const root = renderResults({ filters: {} });
     expect(root.message.textContent).toContain('enter a search term');
   });
 
   it('renders error when no results and valid query', () => {
     const root = renderResults({
       filters: { query: 'test' },
-      hasSearchParams: true,
     });
-    expect(root.message.firstChild.textContent).toContain('No results were found');
+    expect(root.message.firstChild.textContent).toContain(
+      'No results were found');
   });
 
   it('renders searching text during search', () => {
     const root = renderResults({
       filters: { query: 'test' },
-      hasSearchParams: true,
       loading: true,
     });
     expect(root.loadingText.textContent).toEqual('Searching…');
@@ -77,10 +66,10 @@ describe('<SearchResults />', () => {
   it('renders search result placeholders while loading', () => {
     const root = renderResults({
       filters: { query: 'test' },
-      hasSearchParams: true,
       loading: true,
     });
     const addonsCard = findRenderedComponentWithType(root, AddonsCard);
+
     // Make sure it just renders AddonsCard in a loading state.
     expect(addonsCard.props.loading).toEqual(true);
     expect(addonsCard.props.addons).toEqual([]);

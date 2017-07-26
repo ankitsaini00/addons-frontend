@@ -5,15 +5,12 @@ import {
 } from 'core/constants';
 
 
-export function searchStart({ errorHandlerId, filters, page, results }) {
+export function searchStart({ errorHandlerId, filters, results }) {
   if (!errorHandlerId) {
     throw new Error('errorHandlerId is required');
   }
   if (!filters) {
     throw new Error('filters are required');
-  }
-  if (!page) {
-    throw new Error('page is required');
   }
   if (!results) {
     throw new Error('results are required');
@@ -21,14 +18,14 @@ export function searchStart({ errorHandlerId, filters, page, results }) {
 
   return {
     type: SEARCH_STARTED,
-    payload: { errorHandlerId, filters, page, results },
+    payload: { errorHandlerId, filters, results },
   };
 }
 
-export function searchLoad({ entities, result, filters }) {
+export function searchLoad({ entities, result }) {
   return {
     type: SEARCH_LOADED,
-    payload: { entities, result, filters },
+    payload: { entities, result },
   };
 }
 

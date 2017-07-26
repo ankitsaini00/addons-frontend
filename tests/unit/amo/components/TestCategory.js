@@ -88,14 +88,6 @@ describe('Category', () => {
 
     expect(root.find(SearchBase)).toHaveProp('enableSearchSort', false);
   });
-
-  it('forces hasSearchParams for the Search component', () => {
-    // This prevents search results not appearing because the search
-    // component doesn't recognise a valid search param.
-    const root = render();
-
-    expect(root.find(SearchBase)).toHaveProp('hasSearchParams', true);
-  });
 });
 
 describe('Category.mapStateToProps()', () => {
@@ -139,10 +131,12 @@ describe('Category.mapStateToProps()', () => {
     expect(props).toEqual({
       addonType: ADDON_TYPE_THEME,
       category: null,
-      count: 0,
+      // count: 0,
+      count: undefined,
       filters,
       loading: true,
-      page: 1,
+      // page: 1,
+      page: undefined,
       pathname: '/themes/ad-block/',
       queryParams: { page: 1 },
       results: [],
